@@ -5,16 +5,22 @@ import cloudpickle
 
 # ---------- MODEL LOADING ----------
 @st.cache_resource
-def load_model():
-    """Load the trained pipeline once per session."""
-    try:
-        with open("models/final_pipelineY.pkl", "rb") as f:
-            return cloudpickle.load(f)
-    except Exception as e:
-        st.error(f"Failed to load model: {e}")
-        return None
+def download_file_from_drive(file_id, output):
+    if not os.path.exists(output):
+        st.info(f"Downloading {output} ...")
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, output, quiet=False)
 
-model = load_model()
+
+download_file_from_drive("15NY4RXXX7AleM2xV87G2n5h1T2Voiozj", "final_pipelineY.pkl")
+
+
+def load_model():
+    with open("final_pipelineY.pkl", "rb") as f:
+    return pickle.load(f)
+
+model=load_model()
+
 
 st.title("Gene Mutation Classifier")
 
