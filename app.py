@@ -1,7 +1,8 @@
 import os
 import streamlit as st
 import pandas as pd
-import cloudpickle
+import gdown
+import joblib
 
 # ---------- MODEL LOADING ----------
 @st.cache_resource
@@ -17,7 +18,7 @@ download_file_from_drive("15NY4RXXX7AleM2xV87G2n5h1T2Voiozj", "final_pipelineY.p
 
 def load_model():
     with open("final_pipelineY.pkl", "rb") as f:
-    return pickle.load(f)
+        return joblib.load(f)
 
 model=load_model()
 
@@ -67,3 +68,4 @@ if st.button("Predict"):
         st.write(f"**Confidence:** {prob:.2%}")
     else:
         st.error("Model not loaded — check the file path or format.")
+
