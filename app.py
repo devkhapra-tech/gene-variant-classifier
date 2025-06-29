@@ -68,4 +68,3 @@ if st.button("Predict"):
         st.write(f"**Confidence:** {prob:.2%}")
     else:
         st.error("Model not loaded — check the file path or format.")
-
